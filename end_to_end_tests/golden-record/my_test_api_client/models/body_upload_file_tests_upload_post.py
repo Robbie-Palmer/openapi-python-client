@@ -276,7 +276,7 @@ class BodyUploadFileTestsUploadPost:
                 some_nullable_object_type_0 = BodyUploadFileTestsUploadPostSomeNullableObject.from_dict(data)
 
                 return some_nullable_object_type_0
-            except:  # noqa: E722
+            except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(BodyUploadFileTestsUploadPostSomeNullableObject | None, data)
 
@@ -316,18 +316,20 @@ class BodyUploadFileTestsUploadPost:
 
         some_nullable_number = _parse_some_nullable_number(d.pop("some_nullable_number", UNSET))
 
-        some_int_array = []
         _some_int_array = d.pop("some_int_array", UNSET)
-        for some_int_array_item_data in _some_int_array or []:
+        some_int_array: list[int | None] | Unset = UNSET
+        if _some_int_array is not UNSET:
+            some_int_array = []
+            for some_int_array_item_data in _some_int_array:
 
-            def _parse_some_int_array_item(data: object) -> int | None:
-                if data is None:
-                    return data
-                return cast(int | None, data)
+                def _parse_some_int_array_item(data: object) -> int | None:
+                    if data is None:
+                        return data
+                    return cast(int | None, data)
 
-            some_int_array_item = _parse_some_int_array_item(some_int_array_item_data)
+                some_int_array_item = _parse_some_int_array_item(some_int_array_item_data)
 
-            some_int_array.append(some_int_array_item)
+                some_int_array.append(some_int_array_item)
 
         def _parse_some_array(data: object) -> list[AFormData] | None | Unset:
             if data is None:
@@ -345,7 +347,7 @@ class BodyUploadFileTestsUploadPost:
                     some_array_type_0.append(some_array_type_0_item)
 
                 return some_array_type_0
-            except:  # noqa: E722
+            except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[AFormData] | None | Unset, data)
 

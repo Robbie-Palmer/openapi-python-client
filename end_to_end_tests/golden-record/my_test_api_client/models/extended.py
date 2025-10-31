@@ -279,7 +279,7 @@ class Extended:
                 a_camel_date_time_type_0 = isoparse(data)
 
                 return a_camel_date_time_type_0
-            except:  # noqa: E722
+            except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             if not isinstance(data, str):
                 raise TypeError()
@@ -300,7 +300,7 @@ class Extended:
                 a_nullable_date_type_0 = isoparse(data).date()
 
                 return a_nullable_date_type_0
-            except:  # noqa: E722
+            except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(datetime.date | None, data)
 
@@ -317,7 +317,7 @@ class Extended:
                 a_nullable_uuid_type_0 = UUID(data)
 
                 return a_nullable_uuid_type_0
-            except:  # noqa: E722
+            except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | UUID, data)
 
@@ -339,7 +339,7 @@ class Extended:
                 one_of_models_type_0 = FreeFormModel.from_dict(data)
 
                 return one_of_models_type_0
-            except:  # noqa: E722
+            except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             try:
                 if not isinstance(data, dict):
@@ -347,7 +347,7 @@ class Extended:
                 one_of_models_type_1 = ModelWithUnionProperty.from_dict(data)
 
                 return one_of_models_type_1
-            except:  # noqa: E722
+            except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(Any | FreeFormModel | ModelWithUnionProperty, data)
 
@@ -362,7 +362,7 @@ class Extended:
                 nullable_one_of_models_type_0 = FreeFormModel.from_dict(data)
 
                 return nullable_one_of_models_type_0
-            except:  # noqa: E722
+            except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             try:
                 if not isinstance(data, dict):
@@ -370,7 +370,7 @@ class Extended:
                 nullable_one_of_models_type_1 = ModelWithUnionProperty.from_dict(data)
 
                 return nullable_one_of_models_type_1
-            except:  # noqa: E722
+            except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(FreeFormModel | ModelWithUnionProperty | None, data)
 
@@ -387,7 +387,7 @@ class Extended:
                 nullable_model_type_1 = ModelWithUnionProperty.from_dict(data)
 
                 return nullable_model_type_1
-            except:  # noqa: E722
+            except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(ModelWithUnionProperty | None, data)
 
@@ -402,17 +402,19 @@ class Extended:
         else:
             an_optional_allof_enum = AnAllOfEnum(_an_optional_allof_enum)
 
-        nested_list_of_enums = []
         _nested_list_of_enums = d.pop("nested_list_of_enums", UNSET)
-        for nested_list_of_enums_item_data in _nested_list_of_enums or []:
-            nested_list_of_enums_item = []
-            _nested_list_of_enums_item = nested_list_of_enums_item_data
-            for nested_list_of_enums_item_item_data in _nested_list_of_enums_item:
-                nested_list_of_enums_item_item = DifferentEnum(nested_list_of_enums_item_item_data)
+        nested_list_of_enums: list[list[DifferentEnum]] | Unset = UNSET
+        if _nested_list_of_enums is not UNSET:
+            nested_list_of_enums = []
+            for nested_list_of_enums_item_data in _nested_list_of_enums:
+                nested_list_of_enums_item = []
+                _nested_list_of_enums_item = nested_list_of_enums_item_data
+                for nested_list_of_enums_item_item_data in _nested_list_of_enums_item:
+                    nested_list_of_enums_item_item = DifferentEnum(nested_list_of_enums_item_item_data)
 
-                nested_list_of_enums_item.append(nested_list_of_enums_item_item)
+                    nested_list_of_enums_item.append(nested_list_of_enums_item_item)
 
-            nested_list_of_enums.append(nested_list_of_enums_item)
+                nested_list_of_enums.append(nested_list_of_enums_item)
 
         _a_not_required_date = d.pop("a_not_required_date", UNSET)
         a_not_required_date: datetime.date | Unset
@@ -452,7 +454,7 @@ class Extended:
                 not_required_one_of_models_type_0 = FreeFormModel.from_dict(data)
 
                 return not_required_one_of_models_type_0
-            except:  # noqa: E722
+            except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             if not isinstance(data, dict):
                 raise TypeError()
@@ -475,7 +477,7 @@ class Extended:
                 not_required_nullable_one_of_models_type_0 = FreeFormModel.from_dict(data)
 
                 return not_required_nullable_one_of_models_type_0
-            except:  # noqa: E722
+            except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             try:
                 if not isinstance(data, dict):
@@ -483,7 +485,7 @@ class Extended:
                 not_required_nullable_one_of_models_type_1 = ModelWithUnionProperty.from_dict(data)
 
                 return not_required_nullable_one_of_models_type_1
-            except:  # noqa: E722
+            except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(FreeFormModel | ModelWithUnionProperty | None | str | Unset, data)
 
@@ -509,7 +511,7 @@ class Extended:
                 not_required_nullable_model_type_1 = ModelWithUnionProperty.from_dict(data)
 
                 return not_required_nullable_model_type_1
-            except:  # noqa: E722
+            except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(ModelWithUnionProperty | None | Unset, data)
 
